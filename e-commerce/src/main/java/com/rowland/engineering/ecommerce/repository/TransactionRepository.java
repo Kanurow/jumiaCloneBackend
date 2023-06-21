@@ -1,0 +1,12 @@
+package com.rowland.engineering.ecommerce.repository;
+
+import com.rowland.engineering.ecommerce.model.Transaction;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface TransactionRepository extends JpaRepository<Transaction, Long> {
+    List<Transaction> findAllBySenderId(Long userId);
+}
