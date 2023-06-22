@@ -1,7 +1,5 @@
 package com.rowland.engineering.ecommerce.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.rowland.engineering.ecommerce.dto.ProductRequest;
 import jakarta.persistence.*;
 
 import jakarta.persistence.Table;
@@ -13,11 +11,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-
 
 
 @Builder
@@ -25,6 +22,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Slf4j
 @Table(name = "product")
 public class Product {
 
@@ -38,10 +36,10 @@ public class Product {
     @Column(name = "product_name")
     private String productName;
 
-    @NotBlank
-    @Size(max = 40)
+
     @Column(name = "category")
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private Category category;
     
 
     @NotNull
@@ -70,10 +68,22 @@ public class Product {
     @Column(name = "image")
     private byte[] image;
 
+    @Column(name = "image_url")
+    private String imageUrl;
 
+    @Transient
+    private MultipartFile imageFile;
 
+    public void setImageFile(MultipartFile imageFile) {
+        this.imageFile = imageFile;
+        try {
+            this.image = imageFile.getBytes();
+        } catch (IOException e) {
+            log.error("An error occurred while setting the image file.", e);
+        }
+        }
+    }
 
-}
 
 
 

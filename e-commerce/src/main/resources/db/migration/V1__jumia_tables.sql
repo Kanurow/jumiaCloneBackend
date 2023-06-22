@@ -30,6 +30,7 @@ CREATE TABLE product (
   percentage_discount INT NOT NULL,
   description TEXT,
   image LONGBLOB,
+  image_url VARCHAR(500) NOT NULL,
   category VARCHAR(40) NOT NULL
 );
 

@@ -1,5 +1,6 @@
 package com.rowland.engineering.ecommerce.service;
 
+import com.cloudinary.Cloudinary;
 import com.rowland.engineering.ecommerce.dto.DepositRequest;
 import com.rowland.engineering.ecommerce.dto.TransferRequest;
 import com.rowland.engineering.ecommerce.dto.UpdateUserRequest;
@@ -16,6 +17,7 @@ import com.rowland.engineering.ecommerce.repository.TransactionRepository;
 import com.rowland.engineering.ecommerce.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +31,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final TransactionRepository transactionRepository;
-
     private final FavouriteRepository favouriteRepository;
 
     public List<User> getAllUsers() {

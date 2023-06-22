@@ -63,36 +63,38 @@ public class ProductController {
 //        return new ResponseEntity<ApiResponse>(productService.markProductAsFavourite(productId,userId),HttpStatus.ACCEPTED);
 //    }
 
-    @Operation(
-            description = "Post request for marking a product as favourite",
-            summary = "Enables selecting a product as favourite"
-    )
-    @PostMapping("/addtocart/{productId}/{userId}")
-    public ResponseEntity<ApiResponse> addToCart(
-            @PathVariable(value = "productId") Long productId,
-            @PathVariable(value = "userId") Long userId) {
-        return new ResponseEntity<ApiResponse>(productService.addToCart(productId,userId),HttpStatus.ACCEPTED);
-    }
+//    @Operation(
+//            description = "Post request for marking a product as favourite",
+//            summary = "Enables selecting a product as favourite"
+//    )
+//    @PostMapping("/addtocart/{productId}/{userId}")
+//    public ResponseEntity<ApiResponse> addToCart(
+//            @PathVariable(value = "productId") Long productId,
+//            @PathVariable(value = "userId") Long userId) {
+//        return new ResponseEntity<ApiResponse>(productService.addToCart(productId,userId),HttpStatus.ACCEPTED);
+//    }
 
-    @Operation(
-            description = "Delete request for removing a product from cart",
-            summary = "Enables removing a product from cart"
-    )
-    @DeleteMapping("/removefromcart/{id}")
-    public ResponseEntity<ApiResponse> removeFromCart(
-            @PathVariable(value = "id") Long id) {
-        return new ResponseEntity<ApiResponse>(productService.removeFromCart(id),HttpStatus.ACCEPTED);
-    }
-    @DeleteMapping("/unmark/{id}")
-    public ResponseEntity<ApiResponse> unmarkProductAsFavourite(
-            @PathVariable(value = "id") Long id,
-            @CurrentUser User currentUser) {
-        try {
-            return new ResponseEntity<>(productService.unmark(id, currentUser), HttpStatus.ACCEPTED);
-        } catch (Exception ex) {
-            return new ResponseEntity<>(new ApiResponse(false, "Error occurred while unmarking the favourite: " + ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @Operation(
+//            description = "Delete request for removing a product from cart",
+//            summary = "Enables removing a product from cart"
+//    )
+//    @DeleteMapping("/removefromcart/{id}")
+//    public ResponseEntity<ApiResponse> removeFromCart(
+//            @PathVariable(value = "id") Long id) {
+//        return new ResponseEntity<ApiResponse>(productService.removeFromCart(id),HttpStatus.ACCEPTED);
+//    }
+
+
+//    @DeleteMapping("/unmark/{id}")
+//    public ResponseEntity<ApiResponse> unmarkProductAsFavourite(
+//            @PathVariable(value = "id") Long id,
+//            @CurrentUser User currentUser) {
+//        try {
+//            return new ResponseEntity<>(productService.unmark(id, currentUser), HttpStatus.ACCEPTED);
+//        } catch (Exception ex) {
+//            return new ResponseEntity<>(new ApiResponse(false, "Error occurred while unmarking the favourite: " + ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
 
     @Operation(
@@ -142,33 +144,33 @@ public class ProductController {
 
 
 
-    @Operation(
-            description = "Delete selected product",
-            summary = "Deletes created product"
-    )
-    @DeleteMapping("/delete/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<ApiResponse> deleteProduct(
-            @PathVariable(value = "id") Long id,
-            @CurrentUser User currentUser) {
-        return new ResponseEntity<ApiResponse>(productService.deleteProduct(id, currentUser),HttpStatus.OK);
-    }
+//    @Operation(
+//            description = "Delete selected product",
+//            summary = "Deletes created product"
+//    )
+//    @DeleteMapping("/delete/{id}")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    public ResponseEntity<ApiResponse> deleteProduct(
+//            @PathVariable(value = "id") Long id,
+//            @CurrentUser User currentUser) {
+//        return new ResponseEntity<ApiResponse>(productService.deleteProduct(id, currentUser),HttpStatus.OK);
+//    }
 
 
-    @Operation(
-            description = "Creates promo code",
-            summary = "Enables admin create special codes when used during user registration, will earn free voucher"
-    )
-    @PostMapping("/addPromoCode")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<?> createPromo(@Valid @RequestBody PromoCodeRequest promoCodeRequest) {
-        PromoCode promo = productService.createPromo(promoCodeRequest);
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest().path("/{promoId}")
-                .buildAndExpand(promo.getId()).toUri();
-        return ResponseEntity.created(location)
-                .body(new ApiResponse(true, "Promo Created Successfully"));
-    }
+//    @Operation(
+//            description = "Creates promo code",
+//            summary = "Enables admin create special codes when used during user registration, will earn free voucher"
+//    )
+//    @PostMapping("/addPromoCode")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    public ResponseEntity<?> createPromo(@Valid @RequestBody PromoCodeRequest promoCodeRequest) {
+//        PromoCode promo = productService.createPromo(promoCodeRequest);
+//        URI location = ServletUriComponentsBuilder
+//                .fromCurrentRequest().path("/{promoId}")
+//                .buildAndExpand(promo.getId()).toUri();
+//        return ResponseEntity.created(location)
+//                .body(new ApiResponse(true, "Promo Created Successfully"));
+//    }
 
     @Operation(
             description = "Get all created promo code",
@@ -183,16 +185,17 @@ public class ProductController {
 
 
 
-    @Operation(
-            description = "Post request for checking out selected products",
-            summary = "Checking out shopping cart"
-    )
-    @PostMapping("/checkout/{userId}")
-    public ResponseEntity<ApiResponse> checkoutCart(
-            @RequestBody CartCheckoutRequest checkoutRequest,
-            @PathVariable(value = "userId") Long userId) {
-        return new ResponseEntity<ApiResponse>(productService.checkoutCart(checkoutRequest,userId),HttpStatus.ACCEPTED);
-    }
+
+//    @Operation(
+//            description = "Post request for checking out selected products",
+//            summary = "Checking out shopping cart"
+//    )
+//    @PostMapping("/checkout/{userId}")
+//    public ResponseEntity<ApiResponse> checkoutCart(
+//            @RequestBody CartCheckoutRequest checkoutRequest,
+//            @PathVariable(value = "userId") Long userId) {
+//        return new ResponseEntity<ApiResponse>(productService.checkoutCart(checkoutRequest,userId),HttpStatus.ACCEPTED);
+//    }
 
 
 
@@ -246,11 +249,11 @@ public class ProductController {
             summary = "Enables authorized users with admin role to create products"
     )
     @PostMapping("/createProduct")
-    public ResponseEntity<?> createProductWithImg(@RequestParam("imageFile") MultipartFile imageFile,
+    public ResponseEntity<String> createProductWithImg(@RequestParam("imageFile") MultipartFile imageFile,
                                                 @RequestParam("productName") String productName,
                                                 @RequestParam("price") Double price,
                                                 @RequestParam("percentageDiscount") String percentageDiscount,
-                                                @RequestParam("category") String category,
+                                                @RequestParam("category") Category category,
                                                 @RequestParam("quantity") Integer quantity,
                                                 @RequestParam("description") String description) throws IOException {
         return productService.createProduct(imageFile,  productName,  price, Integer.valueOf(percentageDiscount),  category, quantity, description);
