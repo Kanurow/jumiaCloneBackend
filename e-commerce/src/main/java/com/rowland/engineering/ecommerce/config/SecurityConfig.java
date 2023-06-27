@@ -1,13 +1,10 @@
 package com.rowland.engineering.ecommerce.config;
 
-import com.rowland.engineering.ecommerce.model.Role;
-import com.rowland.engineering.ecommerce.model.RoleName;
-import com.rowland.engineering.ecommerce.repository.RoleRepository;
+
 import com.rowland.engineering.ecommerce.security.CustomUserDetailsService;
 import com.rowland.engineering.ecommerce.security.JwtAuthenticationEntryPoint;
 import com.rowland.engineering.ecommerce.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -65,8 +62,6 @@ public class SecurityConfig {
                 .and()
                 .csrf()
                 .disable()
-//                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-//                .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(unauthorizedHandler)
                 .and()

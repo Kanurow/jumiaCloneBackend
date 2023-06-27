@@ -11,7 +11,6 @@ import java.util.Optional;
 @Repository
 public interface CartCheckoutRepository extends JpaRepository<CartCheckout, Long> {
 
-    List<CartCheckout> findByOrderAddressContaining(String keyword);
     List<CartCheckout> findByUserId(Long userId);
 }
 

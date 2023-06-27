@@ -64,25 +64,14 @@ public class Product {
     private String description;
 
 
-    @Lob
-    @Column(name = "image")
-    private byte[] image;
+//    @Lob
+//    @Column(name = "image")
+//    private byte[] image;
 
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Transient
-    private MultipartFile imageFile;
-
-    public void setImageFile(MultipartFile imageFile) {
-        this.imageFile = imageFile;
-        try {
-            this.image = imageFile.getBytes();
-        } catch (IOException e) {
-            log.error("An error occurred while setting the image file.", e);
-        }
-        }
-    }
+}
 
 
 

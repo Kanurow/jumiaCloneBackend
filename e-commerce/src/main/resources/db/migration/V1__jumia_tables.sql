@@ -9,16 +9,8 @@ CREATE TABLE user_roles (
     role_id VARCHAR(50)
 );
 
-CREATE TABLE favourite (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    product_id INT,
-    user_id INT
-);
-CREATE TABLE cart_table (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    product_id INT,
-    user_id INT
-);
+
+
 
 
 CREATE TABLE product (
@@ -29,7 +21,6 @@ CREATE TABLE product (
   quantity INT NOT NULL,
   percentage_discount INT NOT NULL,
   description TEXT,
-  image LONGBLOB,
   image_url VARCHAR(500) NOT NULL,
   category VARCHAR(40) NOT NULL
 );
@@ -44,37 +35,34 @@ CREATE TABLE users_table (
     last_name VARCHAR(50) NOT NULL,
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    account_number VARCHAR(10) UNIQUE NOT NULL,
+    jumia_account_number VARCHAR(10) UNIQUE NOT NULL,
     `password` VARCHAR(10000) NOT NULL ,
     mobile VARCHAR(100) ,
+    account_balance INT NOT NULL,
     date_of_birth VARCHAR(100) ,
     authorities VARCHAR(50),
-    account_balance INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP
 );
 
-CREATE TABLE transaction_table (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    sender_id BIGINT,
-    receiver_id BIGINT,
-    amount DOUBLE,
-    transaction_type VARCHAR(20),
-    transaction_time DATETIME
-
-);
 
 
-CREATE TABLE promo_table (
+CREATE TABLE cart_table (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    code VARCHAR(50),
-    promo_amount INT
+    product_id INT,
+    user_id INT
 );
-
 
 CREATE TABLE cart_checkout (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  order_address VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
+  first_name VARCHAR(255) NOT NULL,
+  phone_number INT NOT NULL,
+  alternative_phone_number INT,
+  delivery_address VARCHAR(300) NOT NULL,
+  additional_information VARCHAR(300),
+  region VARCHAR(50) NOT NULL,
+  state VARCHAR(50) NOT NULL,
   price DOUBLE NOT NULL,
   quantity INT NOT NULL,
   user_id INT NOT NULL
@@ -83,6 +71,8 @@ CREATE TABLE cart_checkout (
 CREATE TABLE cart_item (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
   product_name VARCHAR(255) NOT NULL,
+  product_id INT NOT NULL,
+  image_url VARCHAR(2000) NOT NULL,
   price DOUBLE NOT NULL,
   quantity INT NOT NULL,
   subtotal DOUBLE NOT NULL,

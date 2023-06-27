@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
                 "email"
         }),
         @UniqueConstraint(columnNames = {
-                "account_number"
+                "jumia_account_number"
         })
 })
 public class User extends DateAudit implements UserDetails {
@@ -63,8 +63,8 @@ public class User extends DateAudit implements UserDetails {
     @NotBlank
     @Size(max = 10)
     @NaturalId
-    @Column(name = "account_number")
-    private String accountNumber;
+    @Column(name = "jumia_account_number")
+    private String jumiaAccountNumber;
 
     @Email
     @NaturalId
@@ -112,13 +112,13 @@ public class User extends DateAudit implements UserDetails {
                 user.getEmail(),
                 user.getPassword(),
                 user.getMobile(),
-                user.getAccountNumber(),
+                user.getJumiaAccountNumber(),
                 user.getRoles(),
                 authorities
         );
     }
 
-    public User(Long id,  String username, String firstName, String lastName, String dateOfBirth, String email, String password, String mobile, String accountNumber, Set<Role> roles, List<GrantedAuthority> authorities) {
+    public User(Long id,  String username, String firstName, String lastName, String dateOfBirth, String email, String password, String mobile, String jumiaAccountNumber, Set<Role> roles, List<GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -128,7 +128,7 @@ public class User extends DateAudit implements UserDetails {
         this.email = email;
         this.password = password;
         this.mobile = mobile;
-        this.accountNumber = accountNumber;
+        this.jumiaAccountNumber = jumiaAccountNumber;
         this.roles = roles;
         this.authorities = authorities;
     }

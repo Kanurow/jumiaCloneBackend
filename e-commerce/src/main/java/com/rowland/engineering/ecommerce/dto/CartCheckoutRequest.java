@@ -10,7 +10,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CartCheckoutRequest {
-    private String orderAddress;
+    private String firstName;
+    private String lastName;
+    private int phoneNumber;
+    private int alternativePhoneNumber;
+    private String deliveryAddress;
+    private String additionalInformation;
+    private  String region;
+    private String state;
+
     private double total;
     private int quantity;
     private Long userId;
@@ -21,8 +29,10 @@ public class CartCheckoutRequest {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class CartItem {
+        private Long productId;
         private String productName;
         private double price;
+        private String imageUrl;
         private int quantity;
         private double subtotal;
 

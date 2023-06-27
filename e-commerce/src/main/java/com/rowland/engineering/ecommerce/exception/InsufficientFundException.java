@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class InsufficientFundException extends RuntimeException {
 
 
-    private double discrepancy;
+    private final double discrepancy;
     public InsufficientFundException( double discrepancy) {
-        super(String.format("$ %s is needed to complete this transaction. Failed!.",  discrepancy));
+        super(String.format("$ %s is needed to complete this purchase. Failed!.",  discrepancy));
         this.discrepancy = discrepancy;
     }
 }

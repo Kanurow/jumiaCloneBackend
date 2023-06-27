@@ -15,8 +15,8 @@ import io.swagger.v3.oas.annotations.servers.Server;
                         email = "Kanurowland92@gmail.com"
 //                        url = "coming soon"
                 ),
-                description = "Documentation For Ecommerce Spring Application",
-                title = "Ecommerce Doc - Rowland",
+                description = "Documentation For Jumia Ecommerce Spring Application",
+                title = "Jumia Doc - Rowland",
                 version = "1.0"
         ),
         servers = {

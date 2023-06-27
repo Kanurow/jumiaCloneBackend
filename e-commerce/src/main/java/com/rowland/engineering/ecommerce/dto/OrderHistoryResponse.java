@@ -1,23 +1,16 @@
-package com.rowland.engineering.ecommerce.model;
+package com.rowland.engineering.ecommerce.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@Entity
-@Table(name = "cart_checkout")
-public class CartCheckout {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class OrderHistoryResponse {
     private Long id;
-
     private String firstName;
     private String lastName;
     private int phoneNumber;
@@ -27,33 +20,20 @@ public class CartCheckout {
     private  String region;
     private String state;
 
-    private double price;
+    private double total;
     private int quantity;
-//    private double total;
-
-    private Long userId;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_checkout_id")
-    private List<CartItem> cart;
+    private List<OrderHistoryResponse.CartItem> cart;
 
 
+    @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    @Data
-    @Entity
-    @Table(name = "cart_item")
     public static class CartItem {
-
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
-
         private Long productId;
         private String productName;
         private double price;
-        private int quantity;
         private String imageUrl;
+        private int quantity;
         private double subtotal;
 
     }

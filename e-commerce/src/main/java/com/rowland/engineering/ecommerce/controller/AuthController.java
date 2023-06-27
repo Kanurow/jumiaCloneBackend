@@ -46,7 +46,6 @@ public class AuthController {
     private final RoleRepository roleRepository;
 
     private final PasswordEncoder passwordEncoder;
-    private final PromoCodeRepository promoCodeRepository;
     private final JwtTokenProvider tokenProvider;
 
     @Operation(
@@ -88,8 +87,8 @@ public class AuthController {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        String userAccountNumber = generateAccountNumber();
-        user.setAccountNumber(userAccountNumber);
+        String userAccountNumber = generateJumiaUniqueNumber();
+        user.setJumiaAccountNumber(userAccountNumber);
 
         Role userRole;
 
@@ -119,16 +118,12 @@ public class AuthController {
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
 
-    public static String generateAccountNumber() {
+    public static String generateJumiaUniqueNumber() {
         Random random = new Random();
 
-        // Generate a random integer with 10 digits
         int randomNumber = random.nextInt(9000000) + 10000000;
-
-        // Concatenate with "00"
         String generatedNumber = "00" + String.valueOf(randomNumber);
         System.out.println(generatedNumber);
-
         return generatedNumber;
     }
 
